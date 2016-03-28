@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	  <meta charset="utf-8">
+	  <title>TodoMVC</title>
+    <style>
+      body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      iframe {
+        width: 33%;
+        border-width: 0;
+        height: 100vh;
+      }
+    </style>
+	</head>
+	<body>
+		<script>
+      (function(){
+        ['react', 'angular1_5', 'angular2'].forEach(function(variant){
+          var iframe = document.createElement('iframe');
+          iframe.setAttribute('src', window.location.toString().replace('index.html', variant + '/index.html'))
+          document.body.appendChild(iframe);
+        });
+      })();
+    </script>
+	</body>
+</html>
