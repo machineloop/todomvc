@@ -1,0 +1,20 @@
+<header class="header"
+		title="{{todoAppTitle}}"
+		input-placeholder="{{todoInputPlaceholder}}"
+		(newtodo)="newTodoInput($event)">
+</header>
+<section class="main"
+		 [todo-list]="todoList"
+		 [status-map]="statusMap"
+		 [status-filter]="statusFilter"
+		 (toggle_AllComplete)="toggleAllComplete($event)"
+		 (toggle_Status)="toggleStatus($event)"
+		 (remove_Todo)="removeTodo($event)">
+</section>
+<footer class="footer"
+		 [todo-list]="todoList"
+		 [status-map]="statusMap"
+		 [status-filter]="statusFilter"
+		 (switch_filter)="switchFilter($event)"
+		 (clear_completed)="clearCompleted()">
+</footer>
