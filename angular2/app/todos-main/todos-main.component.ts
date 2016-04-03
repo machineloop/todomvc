@@ -7,12 +7,16 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
 		<input class="toggle-all" type="checkbox" (click)="toggleAllComplete($event)" [checked]="toggleAllChecked">
 		<label for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
-			<li *ngFor="#todo of filterTodos(); #i = index" [class.completed]="todo.isCompleted">
+			<li *ngFor="#todo of filterTodos(); #i = index" [class.completed]="todo.isCompleted" [class.editing]="_editingIndex === i">
 				<div class="view">
 					<input class="toggle" type="checkbox" [checked]="todo.isCompleted" (click)="toggleStatus(i)">
-					<label>{{ todo.value }}</label>
+					<label (dblclick)="toggleEdit($event, i)">{{ todo.value }}</label>
 					<button class="destroy" (click)="removeTodo(i)"></button>
 				</div>
+				<form (submit)="updateTodo($event, i)">
+					<input *ngIf="_editingIndex === i" type="text" class="edit" value="{{ todo.value }}" (blur)="updateTodo($event, i)">
+					<input *ngIf="_editingIndex === i" type="submit" name="update" hidefocus="true" tabindex="-1"/>
+				</form>
 			</li>
 		</ul>
 	`
@@ -24,14 +28,22 @@ export class todosMain {
 	@Output() toggle_AllComplete = new EventEmitter();
 	@Output() toggle_Status = new EventEmitter();
 	@Output() remove_Todo = new EventEmitter();
+	@Output() update_Todo = new EventEmitter();
+
+	_editingIndex = -1;
+
+	filterTodos() {
+		return this.todoList.filter( this.statusMap[ this.statusFilter ] );
+	}
+
+	toggleEdit(event, index){
+		this._editingIndex = index;
+		setTimeout(() => event.target.parentElement.nextElementSibling.firstElementChild.focus(), 0);
+	}
 
 	toggleAllComplete(event){
 		let toggleAllChecked: boolean = event.target.checked;
 		this.toggle_AllComplete.emit( toggleAllChecked );
-	}
-
-	filterTodos() {
-		return this.todoList.filter( this.statusMap[ this.statusFilter ] );
 	}
 
 	toggleStatus(todoIndex) {
@@ -40,5 +52,11 @@ export class todosMain {
 
 	removeTodo(index){
 		this.remove_Todo.emit( index );
+	}
+
+	updateTodo(event, index) {
+		let value = event.target.value;
+		this.update_Todo.emit([value, index]);
+		this._editingIndex = -1;
 	}
 }

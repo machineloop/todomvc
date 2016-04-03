@@ -56,4 +56,11 @@ export class AppComponent {
 		this.todoList = this.todoList.filter((todo) => todo.isCompleted !== true);
 	}
 
+	updateTodo(valueIndex) {
+		var [value, index] = valueIndex;
+		var todo = this.todoList[ index ];
+		todo.value = value;
+		this.todoList[ index ] = todo;
+	}
+
 }

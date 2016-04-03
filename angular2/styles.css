@@ -1,0 +1,8 @@
+/* invisible submit btn styles shared by input-header and todos-main components */
+input[type="submit"] {
+	position: absolute;
+	height: 0px;
+	width: 0px;
+	border: none;
+	padding: 0px;
+}

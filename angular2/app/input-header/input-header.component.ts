@@ -10,16 +10,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core'
 			   autofocus
 			   >
 		<input type="submit" name="update" hidefocus="true" tabindex="-1"/>
-	`,
-	styles: [`
-		input[type="submit"] {
-			position: absolute;
-			height: 0px;
-			width: 0px;
-			border: none;
-			padding: 0px;
-		}
-	`]
+	`
 })
 export class inputHeader {
 	@Input('title') title;
