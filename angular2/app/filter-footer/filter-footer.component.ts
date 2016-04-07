@@ -35,7 +35,7 @@ export class filterFooter {
 		let status = event.target.textContent;
 		this.switch_filter.emit( status );
 	}
-	
+
 	clearCompleted(){
 		this.clear_completed.emit('');
 	}

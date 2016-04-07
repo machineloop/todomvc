@@ -4,9 +4,7 @@
 		(newtodo)="newTodoInput($event)">
 </header>
 <section class="main"
-		 [todo-list]="todoList"
-		 [status-map]="statusMap"
-		 [status-filter]="statusFilter"
+		 [todo-list]="getFilteredTodos()"
 		 (toggle_AllComplete)="toggleAllComplete($event)"
 		 (toggle_Status)="toggleStatus($event)"
 		 (remove_Todo)="removeTodo($event)"

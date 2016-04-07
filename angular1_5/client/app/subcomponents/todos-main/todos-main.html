@@ -1,0 +1,15 @@
+<input class="toggle-all" type="checkbox" ng-click="vm.toggleAllComplete($event)" ng-checked="vm.toggleAllChecked">
+<label for="toggle-all">Mark all as complete</label>
+<ul class="todo-list">
+  <li ng-repeat="todo in vm.getFilteredTodos()" ng-class="{completed: todo.isCompleted, editing: vm._editingIndex === $index}">
+    <div class="view">
+      <input class="toggle" type="checkbox" ng-checked="todo.isCompleted" ng-click="vm.toggleStatus($index)">
+      <label ng-dblclick="vm.toggleEdit($event, $index)">{{ todo.value }}</label>
+      <button class="destroy" ng-click="vm.removeTodo($index)"></button>
+    </div>
+    <form ng-submit="vm.updateTodo($event, $index)">
+      <input ng-if="vm._editingIndex === $index" type="text" class="edit" value="{{ todo.value }}" ng-blur="vm.updateTodo($event, $index)">
+      <input ng-if="vm._editingIndex === $index" type="submit" name="update" hidefocus="true" tabindex="-1"/>
+    </form>
+  </li>
+</ul>

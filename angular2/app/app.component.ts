@@ -17,7 +17,7 @@ import {filterFooter} from './filter-footer/filter-footer.component'
 export class AppComponent {
 	todoAppTitle: string = 'todos';
 	todoInputPlaceholder: string = 'What needs to be done?';
-	
+
 	statusMap = {
 		all: () => true,
 		active: (todo) => todo.isCompleted === false,
@@ -30,6 +30,10 @@ export class AppComponent {
 
 	newTodoInput(todoText) {
 		todoText && this.todoList.push( {value: todoText, isCompleted: false } );
+	}
+
+	getFilteredTodos(filter: string) {
+		return this.todoList.filter( this.statusMap[ this.statusFilter ]);
 	}
 
 	toggleAllComplete(isChecked: boolean){

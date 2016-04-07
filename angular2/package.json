@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "webpack-dev-server --inline --watch",
+    "build": "webpack",
+    "serve": "webpack-dev-server",
+    "watch": "webpack-dev-server --inline --watch",
     "postinstall": "typings install"
   },
   "author": "Andrew Brassington",

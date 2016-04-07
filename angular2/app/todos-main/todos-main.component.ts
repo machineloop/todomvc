@@ -7,7 +7,7 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
 		<input class="toggle-all" type="checkbox" (click)="toggleAllComplete($event)" [checked]="toggleAllChecked">
 		<label for="toggle-all">Mark all as complete</label>
 		<ul class="todo-list">
-			<li *ngFor="#todo of filterTodos(); #i = index" [class.completed]="todo.isCompleted" [class.editing]="_editingIndex === i">
+			<li *ngFor="#todo of todoList; #i = index" [class.completed]="todo.isCompleted" [class.editing]="_editingIndex === i">
 				<div class="view">
 					<input class="toggle" type="checkbox" [checked]="todo.isCompleted" (click)="toggleStatus(i)">
 					<label (dblclick)="toggleEdit($event, i)">{{ todo.value }}</label>
@@ -23,18 +23,12 @@ import {Component, Input, Output, EventEmitter} from 'angular2/core';
 })
 export class todosMain {
 	@Input('todo-list') todoList;
-	@Input('status-map') statusMap;
-	@Input('status-filter') statusFilter;
 	@Output() toggle_AllComplete = new EventEmitter();
 	@Output() toggle_Status = new EventEmitter();
 	@Output() remove_Todo = new EventEmitter();
 	@Output() update_Todo = new EventEmitter();
 
 	_editingIndex = -1;
-
-	filterTodos() {
-		return this.todoList.filter( this.statusMap[ this.statusFilter ] );
-	}
 
 	toggleEdit(event, index){
 		this._editingIndex = index;
@@ -55,7 +49,7 @@ export class todosMain {
 	}
 
 	updateTodo(event, index) {
-		let value = event.target.value;
+		let value = (event.type ==="submit") ? event.target.querySelector('input').value : event.target.value;
 		this.update_Todo.emit([value, index]);
 		this._editingIndex = -1;
 	}

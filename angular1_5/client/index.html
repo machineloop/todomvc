@@ -2,15 +2,20 @@
 <html lang="en" data-framework="angular1_5">
 	<head>
 		<meta charset="utf-8">
+		<base href="/">
 		<title>React • TodoMVC</title>
-		<link rel="stylesheet" href="./node_modules/todomvc-app-css/index.css">
+		<link rel="stylesheet" href="./index.css">
+		<link rel="stylesheet" href="./styles.css">
 	</head>
-	<body>
-		<section class="todoapp"></section>
-		<footer class="info">
+	<body ng-app="app" ng-strict-di ng-cloak>
+
+    <app>
+      Loading...
+    </app>
+		<div class="info">
 			<p>Double-click to edit a todo</p>
 			<p>Created by <a href="http://brassington.io/" target="_blank">Andrew Brassington</a> using <a href="https://code.angularjs.org/1.5.3/docs/api" target="_blank">Angular 1.5</a></p>
-		</footer>
+		</div>
 
 	</body>
 </html>

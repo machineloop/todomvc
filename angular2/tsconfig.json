@@ -9,9 +9,22 @@
 	},
 	"compileOnSave": false,
 	"buildOnSave": false,
-	"exclude": [ "node_modules" ],
+	"exclude": [
+		"node_modules"
+	],
 	"filesGlob": [
 		"app/**/*.ts",
 		"typings/browser.d.ts"
-	]
+	],
+	"files": [
+		"app/app.component.ts",
+		"app/boot.ts",
+		"app/filter-footer/filter-footer.component.ts",
+		"app/input-header/input-header.component.ts",
+		"app/todos-main/todos-main.component.ts",
+		"typings/browser.d.ts"
+	],
+	"atom": {
+		"rewriteTsconfig": true
+	}
 }
